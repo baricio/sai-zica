@@ -6,8 +6,9 @@ describe('myApp.login module', function() {
 
   describe('login controller', function(){
 
-    it('should instace LoginCtrl', inject(function($controller) {
-      var loginCtrl = $controller('LoginCtrl');
+    it('should instace LoginCtrl', inject(function($controller, $rootScope) {
+      var scope = $rootScope.$new();
+      var loginCtrl = $controller('LoginCtrl',{$scope:scope});
       expect(loginCtrl).toBeDefined();
     }));
 

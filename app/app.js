@@ -4,11 +4,11 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.login',
-  'myApp.view2',
+  'myApp.endereco',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/login'});
+    $routeProvider.otherwise({redirectTo: '/login'});
 }]);

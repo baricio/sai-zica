@@ -1,11 +1,23 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 button.btn-login {
     width: 100%
 }
-.row.logo{
+
+.row.logo {
     height: 100px;
     text-align: center;
 }
-.row.logo img{
+
+.row.logo img {
     width: auto;
     height: auto;
 }
