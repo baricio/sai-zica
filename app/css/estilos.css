@@ -12,6 +12,10 @@ button.btn-login {
     width: 100%
 }
 
+button.btn-100 {
+    width: 100%
+}
+
 .row.logo {
     height: 100px;
     text-align: center;

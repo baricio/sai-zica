@@ -23,3 +23,9 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+#zika-mapa{
+  height: 300px;
+  display: block;
+}
+
