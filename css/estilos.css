@@ -1,0 +1,11 @@
+button.btn-login {
+    width: 100%
+}
+.row.logo{
+    height: 100px;
+    text-align: center;
+}
+.row.logo img{
+    width: auto;
+    height: auto;
+}
