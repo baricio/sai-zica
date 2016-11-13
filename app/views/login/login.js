@@ -9,9 +9,28 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) {
+.controller('LoginCtrl', ['$scope', '$location', 'LoginService', function($scope, $location, LoginService) {
+    $scope.loginForm = {email:'',pass:''};
     $scope.doLogin = function($event){
-        $event.preventDefault();
-        $location.path('/endereco')
+        //LoginService.login($scope.loginForm.email, $scope.loginForm.pass);
+        $location.path('/endereco');
     }
+}])
+
+.service('LoginService',['$http','$sessionStorage', 'REST_TOKEN', 'HEADER_LOGIN',
+    function($http, $sessionStorage, REST_TOKEN, HEADER_LOGIN){
+    this.login = function(user,pass){
+        var login = '?grant_type=password&username='+ user +'&password=' + pass;
+        return $http.post(REST_TOKEN + login,{
+            headers: {Authorization: HEADER_LOGIN}
+        })
+        .then(
+            function (data) {
+                console.log('success',data);
+            },
+            function (err) {
+                console.log('err',err);
+            }
+        );
+    };
 }]);
