@@ -15,11 +15,54 @@ angular.module('myApp.mapa', ['ngRoute'])
 
 .controller('MapaCtrl', ['$scope','$routeParams','NgMap', function($scope, $routeParams, NgMap) {
 
-    if ($routeParams) {
+    /*if ($routeParams) {
         console.log('route params',$routeParams)
+    }*/
+
+    var map;
+    var ctrl = $scope;
+    $scope.lat = -19.9353658;
+    $scope.lon = -43.9398996;
+    $scope.address = '';
+    $scope.country = '';
+    var geocoder = new google.maps.Geocoder;
+
+    console.log('geocoder', geocoder);
+
+    NgMap.getMap({id:"zika-mapa"}).then(function(evtmap) {
+        map = evtmap;
+        window.map = evtmap;
+    });
+
+    $scope.findAddress = function(keyEvent) {
+        if (keyEvent.which === 13){
+            geocoder.geocode({'address': $scope.address}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    ctrl.lat = results[0].geometry.location.lat();
+                    ctrl.lon = results[0].geometry.location.lng();
+                    ctrl.address = results[0].formatted_address;
+                    ctrl.$apply();
+                    map.setCenter(results[0].geometry.location);
+                } else {
+                    Materialize.toast('Endereço não encontrado', 4000);
+                }
+            });
+        }
     }
 
-    NgMap.getMap().then(function(map) {
-        $('#zika-mapa').removeAttr('style');
-    });
+    $scope.setCenter = function(event) {
+        var latlng = {lat: event.latLng.lat(), lng: event.latLng.lng()};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    ctrl.address = results[0].formatted_address;
+                }
+            } else {
+                Materialize.toast('Falha ao recuperar endereço', 4000);
+            }
+        });
+
+        $scope.lat = event.latLng.lat();
+        $scope.lon = event.latLng.lng();
+    }
 }]);

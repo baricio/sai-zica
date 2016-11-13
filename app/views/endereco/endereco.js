@@ -16,6 +16,7 @@ angular.module('myApp.endereco', ['ngRoute'])
 
     EnderecoService.getAddress().then(
         function (resp) {
+            console.log(resp);
             $scope.items = resp.data.data;
         },
         function (err) {
@@ -23,13 +24,11 @@ angular.module('myApp.endereco', ['ngRoute'])
         }
     );
 
-    $scope.addAddress = function(){
-        console.log('addAddress click');
+    $scope.addAddress = function() {
         $location.path('/mapa');
     }
 
-    $scope.editAddress = function(id, lat, lon){
-        console.log('addAddress edit');
+    $scope.editAddress = function(id, lat, lon) {
         $location.path('/mapa/'+id+'/'+lat+'/'+lon);
     }
 
