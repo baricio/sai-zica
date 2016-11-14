@@ -44,7 +44,7 @@ angular.module('myApp.endereco', ['ngRoute'])
 
 .service('EnderecoService',['$http','REST_SYSTEM', function($http, REST_SYSTEM){
     this.getAddress = function(){
-        return $http.get(REST_SYSTEM + 'address?page=1&limit=100')
+        return $http.get(REST_SYSTEM + 'address?page=1&rows=100')
     };
 }]);
 

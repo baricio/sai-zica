@@ -46,6 +46,6 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
 }])
 .run(['$sessionStorage', function($sessionStorage){
     if (!$sessionStorage.token) {
-      $sessionStorage.token = 'Bearer 24efc1cd-2fe7-453a-a586-05ae609a1ddc';
+      $sessionStorage.token = 'Bearer 9b6ff061-91da-41f3-aca6-abeaf9917a11';
     }
 }]);
