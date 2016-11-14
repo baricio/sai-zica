@@ -6,13 +6,21 @@ angular.module('myApp.endereco', ['ngRoute'])
   $routeProvider.when('/endereco', {
     templateUrl: 'views/endereco/endereco.html',
     controller: 'EnderecoCtrl'
-  });
+  })
+  .when('/endereco/:save', {
+    templateUrl: 'views/endereco/endereco.html',
+    controller: 'EnderecoCtrl'
+  })
 }])
 
-.controller('EnderecoCtrl', ['$scope','$location', 'EnderecoService',
-    function($scope, $location, EnderecoService) {
+.controller('EnderecoCtrl', ['$scope','$location', '$routeParams', 'EnderecoService',
+    function($scope, $location, $routeParams, EnderecoService) {
 
     $scope.items = [];
+
+    if($routeParams.save){
+        Materialize.toast('Endereco salvo com sucesso!', 4000);
+    }
 
     EnderecoService.getAddress().then(
         function (resp) {
@@ -36,7 +44,7 @@ angular.module('myApp.endereco', ['ngRoute'])
 
 .service('EnderecoService',['$http','REST_SYSTEM', function($http, REST_SYSTEM){
     this.getAddress = function(){
-        return $http.get(REST_SYSTEM + 'address')
+        return $http.get(REST_SYSTEM + 'address?page=1&limit=100')
     };
 }]);
 
