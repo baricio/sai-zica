@@ -13,8 +13,8 @@ angular.module('myApp.mapa', ['ngRoute'])
     })
 }])
 
-.controller('MapaCtrl', ['$scope','$location','$routeParams','NgMap', 'MapaFactory', 'MapaService',
-    function($scope, $location, $routeParams, NgMap, MapaFactory, MapaService) {
+.controller('MapaCtrl', ['$scope','$location','$routeParams','$sessionStorage','NgMap', 'MapaFactory', 'MapaService',
+    function($scope, $location, $routeParams, $sessionStorage, NgMap, MapaFactory, MapaService) {
 
     var geocoder = new google.maps.Geocoder;
     var map;
@@ -52,6 +52,7 @@ angular.module('myApp.mapa', ['ngRoute'])
                     ctrl.lat = results[0].geometry.location.lat();
                     ctrl.lon = results[0].geometry.location.lng();
                     ctrl.address = results[0].formatted_address;
+                    MapaFactory.translate(results[0].address_components);
                     ctrl.$apply();
                     map.setCenter(results[0].geometry.location);
                 }
@@ -111,7 +112,8 @@ angular.module('myApp.mapa', ['ngRoute'])
         MapaService.saveAddress(MapaFactory.getData()).then(
             function(resp){
                 console.log('ok', resp);
-                $location.path('/endereco/1');
+                $sessionStorage.address_saved = true;
+                $location.path('/endereco');
             },
             function(err){
                 Materialize.toast('Falha ao salvar, tente mais tarde', 4000);

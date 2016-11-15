@@ -6,21 +6,18 @@ angular.module('myApp.endereco', ['ngRoute'])
   $routeProvider.when('/endereco', {
     templateUrl: 'views/endereco/endereco.html',
     controller: 'EnderecoCtrl'
-  })
-  .when('/endereco/:save', {
-    templateUrl: 'views/endereco/endereco.html',
-    controller: 'EnderecoCtrl'
-  })
+  });
 }])
 
-.controller('EnderecoCtrl', ['$scope','$location', '$routeParams', 'EnderecoService',
-    function($scope, $location, $routeParams, EnderecoService) {
+.controller('EnderecoCtrl', ['$scope','$location', '$routeParams', '$sessionStorage', 'EnderecoService',
+    function($scope, $location, $routeParams, $sessionStorage, EnderecoService) {
 
     $scope.items = [];
     $scope.delete = {};
     $('.modal').modal();
 
-    if($routeParams.save){
+    if($sessionStorage.address_saved){
+        $sessionStorage.address_saved = false;
         Materialize.toast('Endereco salvo com sucesso!', 4000);
     }
 

@@ -34,11 +34,13 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
                 return response || $q.when(response);
             },
             'responseError': function (response) {
-                Materialize.toast('Falha ao comunicar com o servidor!', 4000)
                 $('#loading').hide();
                 if (response.status === 401 || response.status === 403) {
                     $sessionStorage.token = '';
                     $location.path('/login');
+                    Materialize.toast('Login inválido. Tente novamente', 4000)
+                }else{
+                    Materialize.toast('Falha ao comunicar com o servidor', 4000)
                 }
                 return $q.reject(response);
             }
@@ -51,7 +53,10 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
     $rootScope.$on('$routeChangeStart', function (event,next) {
       console.log($location.path());
       if (!$sessionStorage.token) {
+          $rootScope.loged = false;
           $location.path('/login');
+      }else{
+        $rootScope.loged = true;
       }
     });
 }]);

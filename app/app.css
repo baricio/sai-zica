@@ -31,9 +31,12 @@
 
 .fixed-action-btn{
   right: 6em !important;
+  bottom: 3em !important;
 }
 
 .collection .collection-item.avatar .secondary-content.delete{
   right: 40px;
 }
+
+
 

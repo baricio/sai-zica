@@ -9,12 +9,19 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginCtrl', ['$scope', '$location', 'LoginService', function($scope, $location, LoginService) {
+.controller('LoginCtrl', ['$scope', '$location', '$sessionStorage', '$rootScope', 'LoginService',
+    function($scope, $location, $sessionStorage, $rootScope, LoginService) {
+    $sessionStorage.token = null;
+    $rootScope.loged = false;
+    $rootScope.generaltitle = 'Sai Zika';
     $scope.loginForm = {email:'',pass:''};
+
     $scope.doLogin = function($event){
         LoginService.login($scope.loginForm.email, $scope.loginForm.pass);
         $location.path('/endereco');
     }
+
+    Materialize.updateTextFields();
 }])
 
 .service('LoginService',['$http','$sessionStorage','$location', 'REST_TOKEN', 'HEADER_LOGIN',
