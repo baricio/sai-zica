@@ -32,7 +32,7 @@ npm start
 
 Agora abra o seu browser no endereço `http://localhost:8000`.
 
-## Como utilizar o sitema
+## Como utilizar o sistema
 
 ### Login
 
@@ -43,13 +43,13 @@ usuário: desafio.front@hotmart.com.br
 senha: 123456
 ```
 
-![alt text](https://github.com/baricio/sai-zika/tree/master/doc/login.png "Tela de Login")
+![alt text](https://raw.githubusercontent.com/baricio/sai-zika/master/doc/login.png "Tela de Login")
 
 ### Endereco
 
 Nessa tela é possível ver todos os endereços cadastrados, adicionar novos, editar e excluir os enderecos
 
-![alt text](https://github.com/baricio/sai-zika/tree/master/doc/endereco.png "Tela de endereco")
+![alt text](https://raw.githubusercontent.com/baricio/sai-zika/master/doc/endereco.png "Tela de endereco")
 
 
 ### Mapa
@@ -60,7 +60,7 @@ Você pode clicar no mapa para pegar o endereço ou fazer a pesquisa no campo de
 
 Na edição só é possível fazer a alteração do título
 
-![alt text](https://github.com/baricio/sai-zika/tree/master/doc/mapa.png "Tela de endereco")
+![alt text](https://raw.githubusercontent.com/baricio/sai-zika/master/doc//mapa.png "Tela de mapa")
 
 
 ## Contato
