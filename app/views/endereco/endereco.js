@@ -49,7 +49,7 @@ angular.module('myApp.endereco', ['ngRoute'])
         $location.path('/mapa/'+id+'/'+lat+'/'+lon);
     }
 
-    $scope.delete = function(id, label) {
+    $scope.deletePrepare = function(id, label) {
         $scope.delete.id = id;
         $scope.delete.label  = label;
         $('#modal_delete').modal('open');
@@ -60,7 +60,7 @@ angular.module('myApp.endereco', ['ngRoute'])
         EnderecoService.deleteAddress($scope.delete.id).then(
             function (resp) {
                 $('#modal_delete_ok').modal('open');
-                $('.id-'+$scope.delete.id).remove();
+                listaAdress();
             },
             function (err) {
                 $scope.delete = {};

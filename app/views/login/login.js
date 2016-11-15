@@ -12,21 +12,31 @@ angular.module('myApp.login', ['ngRoute'])
 .controller('LoginCtrl', ['$scope', '$location', 'LoginService', function($scope, $location, LoginService) {
     $scope.loginForm = {email:'',pass:''};
     $scope.doLogin = function($event){
-        //LoginService.login($scope.loginForm.email, $scope.loginForm.pass);
+        LoginService.login($scope.loginForm.email, $scope.loginForm.pass);
         $location.path('/endereco');
     }
 }])
 
-.service('LoginService',['$http','$sessionStorage', 'REST_TOKEN', 'HEADER_LOGIN',
-    function($http, $sessionStorage, REST_TOKEN, HEADER_LOGIN){
+.service('LoginService',['$http','$sessionStorage','$location', 'REST_TOKEN', 'HEADER_LOGIN',
+    function($http, $sessionStorage, $location, REST_TOKEN, HEADER_LOGIN){
     this.login = function(user,pass){
         var login = '?grant_type=password&username='+ user +'&password=' + pass;
-        return $http.post(REST_TOKEN + login,{
-            headers: {Authorization: HEADER_LOGIN}
-        })
-        .then(
-            function (data) {
-                console.log('success',data);
+        var req = {
+            method: 'POST',
+            url: REST_TOKEN + login,
+            headers: {
+                'Authorization': HEADER_LOGIN
+            },
+            data: {}
+        }
+
+        return $http(req).then(
+            function (resp) {
+                console.log(resp);
+                var token_type = resp.data.token_type.charAt(0).toUpperCase() + resp.data.token_type.slice(1);
+                $sessionStorage.token =  token_type + ' ' + resp.data.access_token;
+                $location.path('/endereco');
+                console.log('success',resp);
             },
             function (err) {
                 console.log('err',err);
